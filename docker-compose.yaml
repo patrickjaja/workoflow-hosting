@@ -7,6 +7,7 @@ volumes:
   redis-data:
   searxng-data:
   phoenix-data:
+  bifrost-data:
 
 x-n8n-shared: &n8n-shared
   image: n8nio/n8n:latest
@@ -212,3 +213,28 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
+
+  bifrost:
+    image: maximhq/bifrost:latest
+    container_name: bifrost
+    ports:
+      - "8080:8080"
+    volumes:
+      - bifrost-data:/app/data
+    environment:
+      - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY:-}
+      - AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT:-}
+      - AZURE_OPENAI_DEPLOYMENT=${AZURE_OPENAI_DEPLOYMENT:-}
+      - AZURE_OPENAI_API_VERSION=${AZURE_OPENAI_API_VERSION:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+    depends_on:
+      phoenix:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s

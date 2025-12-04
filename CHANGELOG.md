@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added `n8n-worker-runner` sidecar container for worker instance
   - Configured broker listen address in x-n8n-shared anchor
   - Uses `n8nio/runners:latest` image with healthchecks
+- Bifrost LLM gateway for centralized AI provider management
+  - Added `bifrost` service with `maximhq/bifrost:latest` image
+  - Supports Azure OpenAI, OpenAI, and Anthropic providers with fallback
+  - OpenTelemetry integration for tracing to Phoenix
+  - Web UI available on port 8080 for provider configuration
 
 ## 2025-10-27
 
