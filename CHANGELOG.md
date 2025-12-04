@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2025-12-04
+
+### Added
+- n8n v2.0 external task runner preparation
+  - Added `n8n-runner` sidecar container for main n8n instance
+  - Added `n8n-worker-runner` sidecar container for worker instance
+  - Configured broker listen address in x-n8n-shared anchor
+  - Uses `n8nio/runners:latest` image with healthchecks
+
 ## 2025-10-27
 
 ### Added
