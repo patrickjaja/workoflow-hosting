@@ -1,5 +1,5 @@
 model_list:
-  # Primary Azure deployment (gpt-4.1)
+  # Azure deployment for gpt-4.1
   - model_name: gpt-4.1
     litellm_params:
       model: azure/gpt-4.1
@@ -7,8 +7,17 @@ model_list:
       api_key: os.environ/AZURE_OPENAI_API_KEY
       api_version: os.environ/AZURE_OPENAI_API_VERSION
       rpm: 60
+      tpm: 80000
 
-  # Alias for OpenAI-compatible clients requesting gpt-4o
+  # OpenAI deployment for gpt-4.1 (same model_name = auto load balance)
+  - model_name: gpt-4.1
+    litellm_params:
+      model: openai/gpt-4o
+      api_key: os.environ/OPENAI_API_KEY
+      rpm: 500
+      tpm: 150000
+
+  # Azure deployment for gpt-4o alias
   - model_name: gpt-4o
     litellm_params:
       model: azure/gpt-4.1
@@ -16,20 +25,23 @@ model_list:
       api_key: os.environ/AZURE_OPENAI_API_KEY
       api_version: os.environ/AZURE_OPENAI_API_VERSION
       rpm: 60
+      tpm: 80000
 
-  # Template for additional Azure subscriptions (uncomment when scaling)
-  # - model_name: gpt-4.1
-  #   litellm_params:
-  #     model: azure/gpt-4.1
-  #     api_base: os.environ/AZURE_OPENAI_ENDPOINT_2
-  #     api_key: os.environ/AZURE_OPENAI_API_KEY_2
-  #     api_version: os.environ/AZURE_OPENAI_API_VERSION
-  #     rpm: 60
+  # OpenAI deployment for gpt-4o (same model_name = auto load balance)
+  - model_name: gpt-4o
+    litellm_params:
+      model: openai/gpt-4o
+      api_key: os.environ/OPENAI_API_KEY
+      rpm: 500
+      tpm: 150000
 
 router_settings:
   routing_strategy: usage-based-routing
-  redis_host: redis
+  redis_host: litellm-redis
   redis_port: 6379
+  num_retries: 3
+  timeout: 30
+  allowed_fails: 3
 
 litellm_settings:
   drop_params: true
