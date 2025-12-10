@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 2025-12-10
 
 ### Changed
+- LiteLLM now uses dedicated PostgreSQL and Redis services
+  - Added `litellm-postgres` service (PostgreSQL 17.5-alpine)
+  - Added `litellm-redis` service (Redis 8.0.1)
+  - New volumes: `litellm-postgres-data`, `litellm-redis-data`
+  - Isolated from n8n's shared database and cache
 - Replaced Bifrost with LiteLLM Proxy for LLM gateway
   - Migrated from `maximhq/bifrost:latest` to `ghcr.io/berriai/litellm:main-latest`
   - New endpoint: port 4000 (previously 8080)
