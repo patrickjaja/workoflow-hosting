@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2025-12-10
+
+### Changed
+- Replaced Bifrost with LiteLLM Proxy for LLM gateway
+  - Migrated from `maximhq/bifrost:latest` to `ghcr.io/berriai/litellm:main-latest`
+  - New endpoint: port 4000 (previously 8080)
+  - Added `litellm_config.yaml` for model and router configuration
+  - Supports 100+ LLM providers with built-in load balancing
+  - Virtual key management for per-user tracking and budget limits
+  - Phoenix OpenInference tracing for evaluations (previously OTEL GenAI only)
+  - Usage-based routing strategy with Redis for distributed rate limiting
+
+### Added
+- LiteLLM environment variables
+  - `LITELLM_MASTER_KEY` for admin authentication
+  - `LITELLM_SALT_KEY` for API credential encryption
+  - `LITELLM_DATABASE_URL` for virtual key storage (uses existing PostgreSQL)
+- Template for multi-Azure subscription scaling in config
+
 ## 2025-12-04
 
 ### Added
@@ -13,11 +32,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added `n8n-worker-runner` sidecar container for worker instance
   - Configured broker listen address in x-n8n-shared anchor
   - Uses `n8nio/runners:latest` image with healthchecks
-- Bifrost LLM gateway for centralized AI provider management
-  - Added `bifrost` service with `maximhq/bifrost:latest` image
-  - Supports Azure OpenAI, OpenAI, and Anthropic providers with fallback
-  - OpenTelemetry integration for tracing to Phoenix
-  - Web UI available on port 8080 for provider configuration
+- ~~Bifrost LLM gateway for centralized AI provider management~~ (replaced by LiteLLM on 2025-12-10)
+  - ~~Added `bifrost` service with `maximhq/bifrost:latest` image~~
+  - ~~Supports Azure OpenAI, OpenAI, and Anthropic providers with fallback~~
+  - ~~OpenTelemetry integration for tracing to Phoenix~~
+  - ~~Web UI available on port 8080 for provider configuration~~
 
 ## 2025-10-27
 

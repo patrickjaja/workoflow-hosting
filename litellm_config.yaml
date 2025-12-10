@@ -1,0 +1,41 @@
+model_list:
+  # Primary Azure deployment (gpt-4.1)
+  - model_name: gpt-4.1
+    litellm_params:
+      model: azure/gpt-4.1
+      api_base: os.environ/AZURE_OPENAI_ENDPOINT
+      api_key: os.environ/AZURE_OPENAI_API_KEY
+      api_version: os.environ/AZURE_OPENAI_API_VERSION
+      rpm: 60
+
+  # Alias for OpenAI-compatible clients requesting gpt-4o
+  - model_name: gpt-4o
+    litellm_params:
+      model: azure/gpt-4.1
+      api_base: os.environ/AZURE_OPENAI_ENDPOINT
+      api_key: os.environ/AZURE_OPENAI_API_KEY
+      api_version: os.environ/AZURE_OPENAI_API_VERSION
+      rpm: 60
+
+  # Template for additional Azure subscriptions (uncomment when scaling)
+  # - model_name: gpt-4.1
+  #   litellm_params:
+  #     model: azure/gpt-4.1
+  #     api_base: os.environ/AZURE_OPENAI_ENDPOINT_2
+  #     api_key: os.environ/AZURE_OPENAI_API_KEY_2
+  #     api_version: os.environ/AZURE_OPENAI_API_VERSION
+  #     rpm: 60
+
+router_settings:
+  routing_strategy: usage-based-routing
+  redis_host: redis
+  redis_port: 6379
+
+litellm_settings:
+  drop_params: true
+  set_verbose: false
+  success_callback: ["arize_phoenix"]
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  database_url: os.environ/LITELLM_DATABASE_URL
