@@ -36,7 +36,7 @@ model_list:
       tpm: 150000
 
 router_settings:
-  routing_strategy: usage-based-routing
+  routing_strategy: simple-shuffle
   redis_host: litellm-redis
   redis_port: 6379
   num_retries: 3
