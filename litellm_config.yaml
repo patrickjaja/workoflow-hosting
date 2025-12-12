@@ -40,7 +40,7 @@ router_settings:
   redis_host: litellm-redis
   redis_port: 6379
   num_retries: 3
-  timeout: 30
+  timeout: 600
   allowed_fails: 3
 
 litellm_settings:
