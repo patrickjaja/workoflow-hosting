@@ -146,7 +146,7 @@ services:
     command: ["--transport", "sse", "--port", "9000", "-vv"]
 
   workoflow-mcp:
-    image: patrickjaja/workoflow-mcp:main
+    image: patricks1987/workoflow-mcp:main
     ports:
       - "9006:9000"
     env_file:
