@@ -145,6 +145,22 @@ services:
     restart: unless-stopped
     command: ["--transport", "sse", "--port", "9000", "-vv"]
 
+  workoflow-mcp:
+    image: patrickjaja/workoflow-mcp:main
+    ports:
+      - "9006:9000"
+    env_file:
+      - ./workoflow-mcp/.env
+    environment:
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://phoenix:4318
+      - OTEL_SERVICE_NAME=workoflow-mcp
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      phoenix:
+        condition: service_healthy
+    restart: unless-stopped
+
   workoflow-teams-bot:
     image: patricks1987/workoflow-teams-bot:main
     ports:
