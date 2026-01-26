@@ -1,13 +1,13 @@
 model_list:
-  # Azure deployment for gpt-4.1 (DISABLED - routing all traffic through OpenAI)
-  # - model_name: gpt-4.1
-  #   litellm_params:
-  #     model: azure/gpt-4.1
-  #     api_base: os.environ/AZURE_OPENAI_ENDPOINT
-  #     api_key: os.environ/AZURE_OPENAI_API_KEY
-  #     api_version: os.environ/AZURE_OPENAI_API_VERSION
-  #     rpm: 60
-  #     tpm: 80000
+  # Azure deployment for gpt-4.1
+  - model_name: gpt-4.1
+    litellm_params:
+      model: azure/gpt-4.1
+      api_base: os.environ/AZURE_OPENAI_ENDPOINT
+      api_key: os.environ/AZURE_OPENAI_API_KEY
+      api_version: os.environ/AZURE_OPENAI_API_VERSION
+      rpm: 60
+      tpm: 80000
 
   # OpenAI deployment for gpt-4.1 (same model_name = auto load balance)
   - model_name: gpt-4.1
@@ -17,15 +17,15 @@ model_list:
       rpm: 500
       tpm: 150000
 
-  # Azure deployment for gpt-4o alias (DISABLED - routing all traffic through OpenAI)
-  # - model_name: gpt-4o
-  #   litellm_params:
-  #     model: azure/gpt-4.1
-  #     api_base: os.environ/AZURE_OPENAI_ENDPOINT
-  #     api_key: os.environ/AZURE_OPENAI_API_KEY
-  #     api_version: os.environ/AZURE_OPENAI_API_VERSION
-  #     rpm: 60
-  #     tpm: 80000
+  # Azure deployment for gpt-4o alias
+  - model_name: gpt-4o
+    litellm_params:
+      model: azure/gpt-4.1
+      api_base: os.environ/AZURE_OPENAI_ENDPOINT
+      api_key: os.environ/AZURE_OPENAI_API_KEY
+      api_version: os.environ/AZURE_OPENAI_API_VERSION
+      rpm: 60
+      tpm: 80000
 
   # OpenAI deployment for gpt-4o (same model_name = auto load balance)
   - model_name: gpt-4o
