@@ -41,7 +41,11 @@ router_settings:
   redis_port: 6379
   num_retries: 3
   timeout: 600
-  allowed_fails: 3
+  # Failover settings: mark deployment unhealthy after 1 failure, cooldown for 60s
+  allowed_fails: 1
+  cooldown_time: 60
+  # Retry on different deployment when rate limited
+  retry_after: 0
 
 litellm_settings:
   drop_params: true
