@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2026-01-26
+
+### Changed
+- LiteLLM failover settings for automatic provider switching
+  - `allowed_fails: 1` - mark deployment unhealthy after 1 failure
+  - `cooldown_time: 60` - keep failed deployment out of rotation for 60s
+  - `retry_after: 0` - retry immediately on different deployment
+
+### Fixed
+- Deploy script now uses `git fetch + reset` to handle force pushes
+
 ## 2025-12-12
 
 ### Fixed
