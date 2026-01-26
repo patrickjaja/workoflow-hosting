@@ -124,10 +124,13 @@ cd /home/docker/docker-setups/workoflow-integration-platform
 log_info "Current directory: $(pwd)"
 log_info "Current branch: $(git branch --show-current)"
 
-log_info "Pulling latest changes from git..."
-git pull
+log_info "Fetching latest changes from git..."
+git fetch origin
 
-log_success "Git pull completed successfully"
+log_info "Resetting to match remote (handles force pushes)..."
+git reset --hard origin/main
+
+log_success "Git sync completed successfully"
 
 log_info "Running setup script..."
 ./setup.sh prod
